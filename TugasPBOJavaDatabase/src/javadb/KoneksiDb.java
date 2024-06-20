@@ -1,5 +1,6 @@
 package javadb;
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class KoneksiDb{
@@ -17,51 +18,55 @@ public class KoneksiDb{
         String kode_brg, nama_brg, satuan;
         int option, stok, stok_min;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Pilih Opsi yang ingin anda pilih : ");
-        System.out.println("1) Input");
-        System.out.println("2) Edit");
-        System.out.println("3) Delete");
-        System.out.println("4) Show");
-        System.out.print("Anda memilih : ");
-        option = scanner.nextInt();
-        switch(option) {
-            case 1:
-                scanner.nextLine();
-                System.out.print("Ketikan kode barang : ");
-                kode_brg = scanner.nextLine();
-                System.out.print("Ketikan nama barang : ");
-                nama_brg = scanner.nextLine();
-                System.out.print("Ketikan satuan barang : ");
-                satuan = scanner.nextLine();
-                System.out.print("Ketikan stok barang : ");
-                stok = scanner.nextInt();
-                System.out.print("Ketikan stok minimal barang : ");
-                stok_min = scanner.nextInt();
-                insert(kode_brg,nama_brg,satuan,stok,stok_min);
-                break;
-            case 2 :
-                scanner.nextLine();
-                String fieldName, newValue, id;
-                System.out.print("Ketikan kode barang : ");
-                id = scanner.nextLine();
-                System.out.print("Ketikan field yang ingin diubah : ");
-                fieldName = scanner.nextLine();
-                System.out.print("Ketikan value yang baru : ");
-                newValue = scanner.nextLine();
-                edit(fieldName,newValue,id);
-                break;
-            case 3 :
-                scanner.nextLine();
-                String id2;
-                System.out.print("Ketikan kode barang : ");
-                id2 = scanner.nextLine();
-                delete(id2);
-                break;
-            case 4 :
-                show();
-                break;
-            default:
-                System.out.println("Tidak ada opsi tersebut !");
+        while(active) {
+            System.out.println("Pilih Opsi yang ingin anda pilih : ");
+            System.out.println("1) Input");
+            System.out.println("2) Edit");
+            System.out.println("3) Delete");
+            System.out.println("4) Show");
+            System.out.print("Anda memilih : ");
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    scanner.nextLine();
+                    System.out.print("Ketikan kode barang : ");
+                    kode_brg = scanner.nextLine();
+                    System.out.print("Ketikan nama barang : ");
+                    nama_brg = scanner.nextLine();
+                    System.out.print("Ketikan satuan barang : ");
+                    satuan = scanner.nextLine();
+                    System.out.print("Ketikan stok barang : ");
+                    stok = scanner.nextInt();
+                    System.out.print("Ketikan stok minimal barang : ");
+                    stok_min = scanner.nextInt();
+                    insert(kode_brg, nama_brg, satuan, stok, stok_min);
+                    break;
+                case 2:
+                    scanner.nextLine();
+                    String fieldName, newValue, id;
+                    System.out.print("Ketikan kode barang : ");
+                    id = scanner.nextLine();
+                    System.out.print("Ketikan field yang ingin diubah : ");
+                    fieldName = scanner.nextLine();
+                    System.out.print("Ketikan value yang baru : ");
+                    newValue = scanner.nextLine();
+                    edit(fieldName, newValue, id);
+                    break;
+                case 3:
+                    scanner.nextLine();
+                    String id2;
+                    System.out.print("Ketikan kode barang : ");
+                    id2 = scanner.nextLine();
+                    delete(id2);
+                    break;
+                case 4:
+                    show();
+                    break;
+                default:
+                    System.out.println("Tidak ada opsi tersebut !");
+            }
+            System.out.print("Apakah anda ingin melakukan hal lain? (1(Ya)/0(Tidak)) : ");
+            active = scanner.nextBoolean();
         }
     }
 
